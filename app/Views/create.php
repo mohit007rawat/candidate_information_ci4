@@ -5,7 +5,8 @@
     <div class="card-body">
         <div class="contianer-fluid">
             <form action="<?= base_url('candidate_curd/save') ?>" method="POST" id="create-form" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?= isset($data['id']) ? $data['id'] : '' ?>">                
+                <input type="hidden" name="id" value="<?= isset($data['id']) ? $data['id'] : '' ?>">   
+                <?= csrf_field() ?>             
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

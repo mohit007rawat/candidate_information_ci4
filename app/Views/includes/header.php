@@ -11,7 +11,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
     <!-- end of Scritps -->
-
+    <style>
+            tr:nth-child(even) {
+                background: #9f9f9f30;
+                }
+    </style>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -42,9 +46,7 @@
                     </div>
                 </div>
             <?php endif ?>
-            <div>
-                <a class="nav-link" href="<?= base_url('candidate_curd/create') ?>"><i class="fa fa-plus-square"></i> Add New</a>
-            </div>
+            
 
 
        

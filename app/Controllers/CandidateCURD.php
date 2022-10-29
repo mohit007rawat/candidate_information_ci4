@@ -6,6 +6,8 @@ use App\Controllers\BaseController;
 use App\Models\CandidateModel;
 use CodeIgniter\Files\File;
 use Dompdf\Dompdf;
+use Dompdf\Options;
+use TCPDF;
 
 class CandidateCURD extends BaseController
 {
@@ -23,6 +25,7 @@ class CandidateCURD extends BaseController
 
     // Index Page
     public function index(){
+        // print_r($this->request->getPost());      
         if(!empty($this->request->getPost('search_data')))
         {
             $searchValue=  $this->request->getPost('search_data');
@@ -34,7 +37,7 @@ class CandidateCURD extends BaseController
 
         $this->data['page_title'] = "List of Candidate";
         $this->data['list'] = $this->candidate_model->orderBy('id DESC')->select('*')->get()->getResult();
-        // echo $this->candidate_model->getLastQuery();
+        echo $this->candidate_model->getLastQuery();
 
         echo view('includes/header', $this->data);
         echo view('list', $this->data);
@@ -52,6 +55,7 @@ class CandidateCURD extends BaseController
 
     // Insert And Update Function
     public function save(){
+        
         $this->data['request'] = $this->request;
         $post = [
             'name' => $this->request->getPost('name'),
@@ -167,18 +171,38 @@ class CandidateCURD extends BaseController
                     </tr>
                     <tr>
                         <th style='border: 1px solid #dddddd; text-align: left; padding: 8px;'>Photo</th>
-                            <img src=/uploads/photo/".$finalData['profile_img']." width='100px' height='100px'>
-                            <td style='border: 1px solid #dddddd; text-align: left; padding: 8px;'></td>
+                        <td style='border: 1px solid #dddddd; text-align: left; padding: 8px;'>
+                        <img alt='..........................................On Live Server Working Properly' src=/uploads/photo/".$finalData['profile_img']." width='100px' height='100px'>
+                        </td>
                     </tr>
                 </table>";
         
-        // echo WRITEPATH; die;
+        // echo $html; die;
 
-        $dompdf = new Dompdf(); 
+        // $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        // $pdf->SetTitle ( 'PDF' );
+        // $pdf->AddPage ();
+        // $pdf->setImageScale ( PDF_IMAGE_SCALE_RATIO );
+        // $pdf->setJPEGQuality ( 90 );
+        // $pdf->Image ( "http://localhost:8080/uploads/photo/".$finalData['profile_img'] );
+        // $pdf->WriteHTML ( $html );
+        // $this->response->setContentType('application/pdf');
+        // $pdf->Output ( 'image_and_html.pdf', 'I' );
+
+        // $pdf->AddPage();
+        // $pdf->writeHTML($html);
+        // $pdf->SetTitle('TCPDF Example 006');
+        // $pdf->SetSubject('TCPDF Tutorial');
+        // $this->response->setContentType('application/pdf');
+        // $pdf->output('hello.pdf','I');
+        $dompdf = new DOMPDF (); 
+        $options = new Options();
+        $options->set('isRemoteEnabled', TRUE);
+        $dompdf->setOptions($options);
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
-        $dompdf->stream("",  array("Attachment"=>false));
+        $dompdf->stream("demo.pdf",  array("Attachment"=>false));
 
         // require_once WRITEPATH . '../vendor/autoload.php';
         // $mpdf = new \Mpdf\Mpdf();

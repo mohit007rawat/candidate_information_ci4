@@ -1,3 +1,6 @@
+<div style="float: right;position: relative;right: 147px;z-index: 1;top: 4px;">
+                <a class="nav-link" href="<?= base_url('candidate_curd/create') ?>"><i class="fa fa-plus-square"></i> Add New</a>
+            </div>
 <div class="card card-outline card-success rounded-0">
     <div class="card-header">
         <h4 class="mb-0">List of Candidate</h4>
@@ -5,6 +8,7 @@
     <div class="card-body">
         <div style="float:right">
             <form method="post" action="<?= base_url('candidate_curd/index') ?>" >
+                <?= csrf_field() ?>
                 <input type="text"  value="<?= isset($search_data) ? $search_data : '' ?>" required="required"  placeholder="Search Here" name="search_data">
                 <input type="submit" class="btn btn-primary"  value="Search">
             </form>
@@ -29,7 +33,7 @@
                         <th class="py-1 text-center">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="xyz">
                     <?php if(count($list) > 0): ?>
                         <?php $i = 1; ?>
                         <?php foreach($list as $row): ?>
