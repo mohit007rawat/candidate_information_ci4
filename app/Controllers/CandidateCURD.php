@@ -37,7 +37,7 @@ class CandidateCURD extends BaseController
 
         $this->data['page_title'] = "List of Candidate";
         $this->data['list'] = $this->candidate_model->orderBy('id DESC')->select('*')->get()->getResult();
-        echo $this->candidate_model->getLastQuery();
+        // echo $this->candidate_model->getLastQuery();
 
         echo view('includes/header', $this->data);
         echo view('list', $this->data);
@@ -84,7 +84,6 @@ class CandidateCURD extends BaseController
             }
             $post['profile_img'] = $getRandomPhotoName ?? NULL;
         }
-
 
 
         if(!empty($this->request->getPost('id')))
