@@ -2,10 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
 use App\Models\CandidateModel;
-use CodeIgniter\Files\File;
-use Dompdf\Dompdf;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
@@ -107,7 +104,7 @@ class Api extends ResourceController
 
 
     // Delete Data
-    public function remove($id = null){
+    public function remove($id= null){
         if(empty($id)){
             return $this->failNotFound('No Candidate found');
         }

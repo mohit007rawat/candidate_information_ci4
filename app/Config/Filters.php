@@ -34,7 +34,7 @@ class Filters extends BaseConfig
     public $globals = [
         'before' => [
             // 'honeypot',
-            'csrf' => ['except' => ['api/save']],
+            'csrf' => ['except' => ['api/save','api/remove/[0-9]+']],
             // 'invalidchars',
         ],
         'after' => [
